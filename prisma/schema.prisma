@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model UserLog {
+  user_ip           String   @id @default(uuid())
+  request_time_date DateTime @default(now())
+  betting_site      String
+}
+
+model betting_site_log {
+  user_ip           Int    @id @default(autoincrement())
+  request_time_date String @db.VarChar(255)
+  betting_site      String @db.VarChar(255)
+}

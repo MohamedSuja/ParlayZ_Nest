@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class BettingSiteLogDto {
+export class UserLogDto {
   @IsNotEmpty()
   user_ip: string;
 
