@@ -1,4 +1,4 @@
-import { IsEmpty, IsNotEmpty } from 'class-validator';
+import { IsEmpty, IsNotEmpty, IsUrl } from 'class-validator';
 import { IsIdAbsent } from 'src/utils/custom_validator/isIdAbsent';
 
 export class UserLogDto {
@@ -13,5 +13,6 @@ export class UserLogDto {
   request_time_date: string;
 
   @IsNotEmpty()
+  @IsUrl()
   betting_site: string;
 }

@@ -25,20 +25,29 @@ export class UserLogService {
     }
   }
 
-  async findAll() {
+  /*   async findAll() {
     return this.databaseService.userLog.findMany();
+  } */
+
+  async filterUserLogByIpOrBettingSite(userIp: string, bettingSite: string) {
+    return this.databaseService.userLog.findMany({
+      where: {
+        AND: [
+          {
+            user_ip: userIp,
+          },
+          {
+            betting_site: bettingSite,
+          },
+        ],
+      },
+    });
   }
 
   async generateCsv(): Promise<string> {
     const data = await this.databaseService.userLog.findMany();
 
-    const filePath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'downloads',
-      'output.csv',
-    );
+    const filePath = path.join(__dirname, '..', '..', 'downloads', 'data.csv');
 
     const csvWriter = createObjectCsvWriter({
       path: filePath,

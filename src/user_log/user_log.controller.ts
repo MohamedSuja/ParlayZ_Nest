@@ -6,6 +6,8 @@ import {
   HttpCode,
   HttpStatus,
   Res,
+  Param,
+  Query,
 } from '@nestjs/common';
 import { UserLogService } from './user_log.service';
 import { UserLogDto } from './dto/user-log.dto';
@@ -22,9 +24,16 @@ export class UserLogController {
     return this.userLogService.create(createUserLogDto);
   }
 
+  @HttpCode(HttpStatus.OK)
   @Get()
-  findAll() {
-    return this.userLogService.findAll();
+  filterUserLogByIpOrBettingSite(
+    @Query('user_ip') userIp: string,
+    @Query('betting_site') bettingSite: string,
+  ) {
+    return this.userLogService.filterUserLogByIpOrBettingSite(
+      userIp,
+      bettingSite,
+    );
   }
 
   @HttpCode(HttpStatus.OK)
