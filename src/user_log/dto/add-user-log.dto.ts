@@ -1,7 +1,7 @@
 import { IsEmpty, IsNotEmpty, IsUrl } from 'class-validator';
 import { IsIdAbsent } from 'src/utils/custom_validator/isIdAbsent';
 
-export class UserLogDto {
+export class AddUserLogDto {
   // reject when enter id
   @IsIdAbsent()
   id: any;

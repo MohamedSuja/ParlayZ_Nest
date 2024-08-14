@@ -10,9 +10,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { UserLogService } from './user_log.service';
-import { UserLogDto } from './dto/user-log.dto';
+import { AddUserLogDto } from './dto/add-user-log.dto';
 import * as path from 'path';
 import { Response } from 'express';
+import { GetUserLogDto } from './dto/get-user-log.dto';
 
 @Controller('user-log')
 export class UserLogController {
@@ -20,20 +21,14 @@ export class UserLogController {
 
   @HttpCode(HttpStatus.CREATED)
   @Post()
-  create(@Body() createUserLogDto: UserLogDto) {
-    return this.userLogService.create(createUserLogDto);
+  addUserLog(@Body() addUserData: AddUserLogDto) {
+    return this.userLogService.create(addUserData);
   }
 
   @HttpCode(HttpStatus.OK)
   @Get()
-  filterUserLogByIpOrBettingSite(
-    @Query('user_ip') userIp: string,
-    @Query('betting_site') bettingSite: string,
-  ) {
-    return this.userLogService.filterUserLogByIpOrBettingSite(
-      userIp,
-      bettingSite,
-    );
+  getUserLog(@Query() getUserLogDto: GetUserLogDto) {
+    return this.userLogService.getUserLogService(getUserLogDto);
   }
 
   @HttpCode(HttpStatus.OK)
