@@ -8,8 +8,7 @@ datasource db {
 }
 
 model UserLog {
-  id                Int      @id @default(autoincrement())
-  user_ip           String
+  user_ip           String   @id @default(uuid())
   request_time_date DateTime @default(now())
   betting_site      String
 }

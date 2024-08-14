@@ -14,7 +14,7 @@ import { Response } from 'express';
 
 @Controller('user-log')
 export class UserLogController {
-  constructor(private readonly userLogService: UserLogService) {}
+  constructor(private userLogService: UserLogService) {}
 
   @HttpCode(HttpStatus.CREATED)
   @Post()
