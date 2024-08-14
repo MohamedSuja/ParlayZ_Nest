@@ -1,4 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
+import { IsIdAbsent } from 'src/utils/custom_validator/isIdAbsent';
 
 export class UserLogDto {
   @IsNotEmpty()

@@ -8,13 +8,8 @@ datasource db {
 }
 
 model UserLog {
-  user_ip           String   @id @default(uuid())
+  id                Int      @id @default(autoincrement())
+  user_ip           String
   request_time_date DateTime @default(now())
   betting_site      String
-}
-
-model betting_site_log {
-  user_ip           Int    @id @default(autoincrement())
-  request_time_date String @db.VarChar(255)
-  betting_site      String @db.VarChar(255)
 }
