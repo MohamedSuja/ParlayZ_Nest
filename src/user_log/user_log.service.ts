@@ -29,25 +29,6 @@ export class UserLogService {
     return this.databaseService.userLog.findMany();
   }
 
-  async findOne(user_ip: string) {
-    return this.databaseService.userLog.findUnique({
-      where: { user_ip: user_ip },
-    });
-  }
-
-  async update(user_ip: string, updateUserLogDto: Prisma.UserLogUpdateInput) {
-    return this.databaseService.userLog.update({
-      where: { user_ip: user_ip },
-      data: updateUserLogDto,
-    });
-  }
-
-  async remove(user_ip: string) {
-    return this.databaseService.userLog.delete({
-      where: { user_ip: user_ip },
-    });
-  }
-
   async generateCsv(): Promise<string> {
     const data = await this.databaseService.userLog.findMany();
 

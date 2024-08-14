@@ -1,6 +1,11 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsEmpty, IsNotEmpty } from 'class-validator';
+import { IsIdAbsent } from 'src/utils/custom_validator/isIdAbsent';
 
 export class UserLogDto {
+  // reject when enter id
+  @IsIdAbsent()
+  id: any;
+
   @IsNotEmpty()
   user_ip: string;
 
