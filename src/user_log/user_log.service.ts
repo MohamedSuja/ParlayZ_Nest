@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
 import { Prisma } from '@prisma/client';
+import { createObjectCsvWriter } from 'csv-writer';
+import * as path from 'path';
 
 @Injectable()
 export class UserLogService {
@@ -44,5 +46,26 @@ export class UserLogService {
     return this.databaseService.userLog.delete({
       where: { user_ip: user_ip },
     });
+  }
+
+  async generateCsv(): Promise<string> {
+    const data = await this.databaseService.userLog.findMany();
+
+    const filePath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'downloads',
+      'output.csv',
+    );
+
+    const csvWriter = createObjectCsvWriter({
+      path: filePath,
+      header: Object.keys(data[0]).map((key) => ({ id: key, title: key })),
+    });
+
+    await csvWriter.writeRecords(data);
+
+    return filePath;
   }
 }
